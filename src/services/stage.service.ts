@@ -2,7 +2,7 @@ import { Step } from "../schemas/step.schema";
 import stageRepository from "../data/stageRepository";
 import { Stage } from "../schemas/stage.schema";
 import { NotFoundError } from "../errors/notFound.error";
-import { InternalError } from "src/errors/internal.error";
+import { InternalError } from "../errors/internal.error";
 
 class StageService {
     async getStages(): Promise<Stage[]> {

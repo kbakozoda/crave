@@ -1,8 +1,8 @@
 import stepRepository from "../data/stepRepository";
 import { Step } from "../schemas/step.schema";
 import stageService from "./stage.service";
-import { NotAllowedError } from "src/errors/notAllowed.error";
-import { NotFoundError } from "src/errors/notFound.error";
+import { NotAllowedError } from "../errors/notAllowed.error";
+import { NotFoundError } from "../errors/notFound.error";
 
 class StepService {
     async getOne(id: String): Promise<Step> {

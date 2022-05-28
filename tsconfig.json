@@ -12,7 +12,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "pretty": true,
     "typeRoots": [
         "node_modules/@types"
