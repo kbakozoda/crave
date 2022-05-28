@@ -1,14 +1,15 @@
-import ErrorCodes from "../constants/errorCodes";
 import stepRepository from "../data/stepRepository";
 import { Step } from "../schemas/step.schema";
 import stageService from "./stage.service";
+import { NotAllowedError } from "src/errors/notAllowed.error";
+import { NotFoundError } from "src/errors/notFound.error";
 
 class StepService {
     async getOne(id: String): Promise<Step> {
         try {
             return await stepRepository.getById(id);
         } catch (error) {
-            throw new Error(`Error: ${ErrorCodes.NOT_FOUND} ${error}`);
+            throw new NotFoundError(error.message);
         }
     }
 
@@ -17,19 +18,19 @@ class StepService {
         const isStageUnlocked = await stageService.isStageUnlocked(step.stageId);
 
         if (!isStageUnlocked)
-            throw new Error("Action not allowed, please complete previous stages first.");
+            throw new NotAllowedError("Action not allowed, please complete previous stages first.");
 
         if (step.isCompleted) {
-            throw new Error("Step is already completed.");
+            throw new NotAllowedError("Step is already completed.");
         }
 
         try {
             const updatedStep = await stepRepository.completeStep(id);
             await stageService.handleStepUpdate(step);
-            
+
             return updatedStep;
         } catch(error) {
-            throw new Error(`Error ${ErrorCodes.NOT_ALLOWED} ${error}`);
+            throw new NotAllowedError(error.message);
         }
     }
 }

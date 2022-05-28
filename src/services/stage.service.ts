@@ -1,14 +1,15 @@
 import { Step } from "../schemas/step.schema";
-import ErrorCodes from "../constants/errorCodes";
 import stageRepository from "../data/stageRepository";
 import { Stage } from "../schemas/stage.schema";
+import { NotFoundError } from "../errors/notFound.error";
+import { InternalError } from "src/errors/internal.error";
 
 class StageService {
     async getStages(): Promise<Stage[]> {
         try {
             return await stageRepository.getStages();
         } catch(error) {
-            throw new Error(`Error: ${ErrorCodes.INTERNAL_ERROR} ${error}`);
+            throw new InternalError(error.message);
         }
     }
 
@@ -16,7 +17,7 @@ class StageService {
         try {
             return await stageRepository.getById(id);
         } catch(error) {
-            throw new Error(`Error: ${ErrorCodes.NOT_FOUND} ${error}`);
+            throw new NotFoundError(error.message);
         }
     }
 
@@ -29,7 +30,7 @@ class StageService {
             // looking for a stage that the step belongs to. It means the db has given id saved
             // as stageId for given step, which means the data in db in wrong.
             // Ideally need to alert through rollbar or something else in this case
-            throw new Error(`Error: ${ErrorCodes.INTERNAL_ERROR} stage with id ${id} does not exist`);
+            throw new InternalError(`Stage with id ${id} does not exist`);
         }
 
         for (let i = 0; i < stageIndex; i++) {

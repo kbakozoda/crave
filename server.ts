@@ -6,6 +6,21 @@ import { StageResolver } from './src/resolvers/stageResolver';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { StepResolver } from "./src/resolvers/stepResolver";
 
+// This is just a placeholder 
+// Todo: Better error handling in general
+const setHttpPlugin = {
+    async requestDidStart() {
+      return {
+            async willSendResponse({ response }) {
+                if (response?.errors?.[0]?.extensions.exception.status) {
+                    response.http.status = response?.errors?.[0]?.extensions.exception.status;
+                }
+            }
+        };
+    }
+};
+  
+
 const main = async () => {
     const app = express();
 
@@ -14,7 +29,7 @@ const main = async () => {
             resolvers: [StageResolver, StepResolver],
             validate: false
         }),
-        plugins: [ApolloServerPluginLandingPageGraphQLPlayground]
+        plugins: [ApolloServerPluginLandingPageGraphQLPlayground, setHttpPlugin]
     });
 
     await apolloServer.start();
