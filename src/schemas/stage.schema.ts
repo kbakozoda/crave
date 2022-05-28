@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, InputType, ObjectType } from "type-graphql";
 import { Step } from "./step.schema";
 
 @ObjectType()
@@ -17,4 +17,10 @@ export class Stage {
 
     @Field({ nullable: true })
     completedAt: Date;
+}
+
+@InputType()
+export class GetStageInput {
+    @Field(type => ID)
+    id: String;
 }

@@ -1,10 +1,12 @@
 import { Stage } from "../schemas/stage.schema";
 
+// I assume that stages are inserted into db 
+// by the required order of completion
 const stagesData: Array<Stage> = [
     {
         title: "Stage 1",
         id: "stg1",
-        isCompleted: true,
+        isCompleted: false,
         steps: [
             {
                 title: "step 1.1",

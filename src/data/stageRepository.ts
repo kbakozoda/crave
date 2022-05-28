@@ -1,4 +1,5 @@
 import { Stage } from "../schemas/stage.schema";
+import stagesData from "./data";
 
 // methods are made this async intentionally
 class StageRepository {

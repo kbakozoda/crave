@@ -1,5 +1,5 @@
-import { Stage } from "../entities/stage";
-import { Query, Resolver } from "type-graphql";
+import { GetStageInput, Stage } from "../schemas/stage.schema";
+import { Arg, Query, Resolver } from "type-graphql";
 import stageService from "../services/stage.service";
 
 @Resolver()
@@ -10,12 +10,12 @@ export class StageResolver {
     }
 
     @Query(() => Stage)
-    async getOne(): Promise<Stage> {
-        return stageService.getFirstStage();
+    async getOne(@Arg("input") input: GetStageInput): Promise<Stage> {
+        return stageService.getOneStage(input.id);
     }
 
     @Query(() => [Stage])
-    async getStage(): Promise<Stage[]> {
+    async getStages(): Promise<Stage[]> {
         return stageService.getStages();
     }
 }
