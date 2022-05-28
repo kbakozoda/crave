@@ -2,13 +2,16 @@ import { Field, ID, InputType, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class Step {
-    @Field(() => String)
+    @Field((type) => ID)
     id: String;
 
-    @Field(() => String)
+    @Field()
     title: String;
 
-    @Field(() => Boolean)
+    @Field()
+    stageId: String;
+
+    @Field()
     isCompleted: Boolean;
 
     @Field({nullable: true})

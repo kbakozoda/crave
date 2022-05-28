@@ -15,6 +15,6 @@ export class Stage {
     @Field(type => [Step])
     steps: Step[];
 
-    @Field()
+    @Field({ nullable: true })
     completedAt: Date;
 }

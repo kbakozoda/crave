@@ -10,16 +10,18 @@ const stagesData: Array<Stage> = [
                 title: "step 1.1",
                 id: "stp11",
                 isCompleted: true,
-                completedAt: new Date()
+                completedAt: new Date(),
+                stageId: "1"
             },
             {
                 title: "step 1.2",
                 id: "stp12",
                 isCompleted: false,
-                completedAt: new Date()
+                completedAt: null,
+                stageId: "1"
             }
         ],
-        completedAt: new Date()
+        completedAt: null
     },
     {
         title: "Stage 2",
@@ -30,13 +32,15 @@ const stagesData: Array<Stage> = [
                 title: "step 2.1",
                 id: "stp21",
                 isCompleted: false,
-                completedAt: new Date()
+                completedAt: null,
+                stageId: "2"
             },
             {
                 title: "step 2.2",
                 id: "stp22",
                 isCompleted: false,
-                completedAt: new Date()
+                completedAt: null,
+                stageId: "2"
             }
         ],
         completedAt: new Date()
