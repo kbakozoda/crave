@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { Step } from "./step";
+import { Step } from "./step.schema";
 
 @ObjectType()
 export class Stage {
