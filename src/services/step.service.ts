@@ -1,6 +1,7 @@
 import ErrorCodes from "../constants/errorCodes";
 import stepRepository from "../data/stepRepository";
 import { Step } from "../schemas/step.schema";
+import stageService from "./stage.service";
 
 class StepService {
     async getOne(id: String): Promise<Step> {
@@ -12,6 +13,12 @@ class StepService {
     }
 
     async completeStep(id: String): Promise<Step> {
+        const step = await this.getOne(id);
+        const isStageUnlocked = await stageService.isStageUnlocked(step.stageId);
+
+        if (!isStageUnlocked)
+            throw new Error("Action not allowed, please complete previous stages first.");
+
         try {
             return await stepRepository.completeStep(id);
         } catch(error) {
