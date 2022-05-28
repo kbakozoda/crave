@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2018",
+    "lib": ["es2018", "esnext.asynciterable"],
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "rootDir": "src",
+  },
+  "include": [
+      "src/**/*", "./scr/**/*.ts"
+  ]
+}
