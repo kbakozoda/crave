@@ -1,4 +1,4 @@
-import { Stage } from "../entities/stage";
+import { Stage } from "../schemas/stage.schema";
 
 const stagesData: Array<Stage> = [
     {
@@ -43,9 +43,18 @@ const stagesData: Array<Stage> = [
     }
 ];
 
+// methods are made this async intentionally
 class StageRepository {
-    async getStages(): Promise<Array<Stage>> { // made this async intentionally
+    async getStages(): Promise<Stage[]> {
         return stagesData;
+    }
+
+    async getById(id: String): Promise<Stage> {
+        const foundStage = stagesData.find((stage) => stage.id === id);
+        if (foundStage)
+            return foundStage;
+
+        throw new Error(`Stage with id ${id} not found`);
     }
 }
 
