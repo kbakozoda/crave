@@ -6,14 +6,20 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "importHelpers": true,
+    "esModuleInterop": true,
     "declaration": true,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "dist",
     "rootDir": "src",
+    "pretty": true,
+    "typeRoots": [
+        "node_modules/@types"
+    ],
   },
   "include": [
-      "src/**/*", "./scr/**/*.ts"
-  ]
+      "./**/*", "./**/*.ts"
+  ],
+  "exclude": ["node_modules"]
 }
