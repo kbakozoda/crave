@@ -3,14 +3,26 @@ import stagesData from "./data";
 
 class StepRepository {
     async getById(id: String): Promise<Step> {
-        stagesData.forEach((stage) => {
-            const foundStep = stage.steps.find((step) => step.id === id);
-            if (foundStep) {
-                return foundStep;
-            }
-        })
+        let foundStep;
 
-        throw new Error(`Step with id ${id} does not exist`);
+        stagesData.forEach((stage) => {
+            if (!foundStep)
+                foundStep = stage.steps.find((step) => step.id === id);
+        });
+
+        if (!foundStep) {
+            throw new Error(`Step with id ${id} does not exist`);
+        }
+
+        return foundStep;        
+    }
+
+    async completeStep(id: String): Promise<Step> {
+        const foundStep = await this.getById(id);
+        foundStep.isCompleted = true;
+        foundStep.completedAt = new Date();
+
+        return foundStep;
     }
 }
 

@@ -1,18 +1,22 @@
+import ErrorCodes from "../constants/errorCodes";
+import stepRepository from "../data/stepRepository";
 import { Step } from "../schemas/step.schema";
-import stageService from "./stage.service";
 
 class StepService {
     async getOne(id: String): Promise<Step> {
-        const stages = await stageService.getStages();
+        try {
+            return await stepRepository.getById(id);
+        } catch (error) {
+            throw new Error(`Error: ${ErrorCodes.NOT_FOUND} ${error}`);
+        }
+    }
 
-        stages.forEach((stage) => {
-            const foundStep = stage.steps.find((step) => step.id === id);
-            if (foundStep) {
-                return foundStep;
-            }
-        })
-
-        throw new Error(`Step with id ${id} does not exist`);
+    async completeStep(id: String): Promise<Step> {
+        try {
+            return await stepRepository.completeStep(id);
+        } catch(error) {
+            throw new Error(`Error ${ErrorCodes.NOT_ALLOWED} ${error}`);
+        }
     }
 }
 

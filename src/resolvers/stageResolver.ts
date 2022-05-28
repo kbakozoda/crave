@@ -10,7 +10,7 @@ export class StageResolver {
     }
 
     @Query(() => Stage)
-    async getOne(@Arg("input") input: GetStageInput): Promise<Stage> {
+    async getOneStage(@Arg("input") input: GetStageInput): Promise<Stage> {
         return stageService.getOneStage(input.id);
     }
 

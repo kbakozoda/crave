@@ -14,7 +14,7 @@ class StageService {
 
     async getOneStage(id: String): Promise<Stage> {
         try {
-            return stageRepository.getById(id);
+            return await stageRepository.getById(id);
         } catch(error) {
             throw new Error(`Error: ${ErrorCodes.NOT_FOUND} ${error}`);
         }

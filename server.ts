@@ -4,13 +4,14 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from 'type-graphql';
 import { StageResolver } from './src/resolvers/stageResolver';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { StepResolver } from "./src/resolvers/stepResolver";
 
 const main = async () => {
     const app = express();
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [StageResolver],
+            resolvers: [StageResolver, StepResolver],
             validate: false
         }),
         plugins: [ApolloServerPluginLandingPageGraphQLPlayground]
