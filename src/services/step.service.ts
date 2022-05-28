@@ -19,8 +19,15 @@ class StepService {
         if (!isStageUnlocked)
             throw new Error("Action not allowed, please complete previous stages first.");
 
+        if (step.isCompleted) {
+            throw new Error("Step is already completed.");
+        }
+
         try {
-            return await stepRepository.completeStep(id);
+            const updatedStep = await stepRepository.completeStep(id);
+            await stageService.handleStepUpdate(step);
+            
+            return updatedStep;
         } catch(error) {
             throw new Error(`Error ${ErrorCodes.NOT_ALLOWED} ${error}`);
         }

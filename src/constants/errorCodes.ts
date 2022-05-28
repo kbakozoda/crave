@@ -1,7 +1,7 @@
 enum ErrorCodes {
-    NOT_FOUND       = 111404,
-    NOT_ALLOWED     = 111405,
-    INTERNAL_ERROR  = 111500
+    NOT_FOUND       = 404,
+    NOT_ALLOWED     = 405,
+    INTERNAL_ERROR  = 500
 }
 
 export default ErrorCodes;
