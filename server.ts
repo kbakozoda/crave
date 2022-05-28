@@ -1,8 +1,8 @@
 import "reflect-metadata";
-import express, { Express } from 'express';
+import express from 'express';
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from 'type-graphql';
-import { StageResolver } from './src/resolvers/stage';
+import { StageResolver } from './src/resolvers/stageResolver';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 const main = async () => {
